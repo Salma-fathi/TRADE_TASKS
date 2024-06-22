@@ -1,0 +1,7 @@
+{
+  "java.compile.nullAnalysis.mode": "automatic",
+  "git.ignoreLimitWarning": true,
+  "cSpell.words": [
+    "Regist"
+  ]
+}
