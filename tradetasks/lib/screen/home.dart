@@ -179,8 +179,8 @@ class _TradeTasksState extends State<TradeTasks> {
 
   Widget _buildSettingsButton() {
     return CustomPaint(
-      size: const Size(350.28, 90.5),
-      painter: CurvePainter(),
+      size: const Size(350.28, 150.5),
+      painter: MyCurvePainter(),
       child: Center(
         child: ElevatedButton(
           style: ElevatedButton.styleFrom(
@@ -219,21 +219,34 @@ class _TradeTasksState extends State<TradeTasks> {
   }
 }
 
-class CurvePainter extends CustomPainter {
+
+
+class MyCurvePainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     final paint = Paint()
       ..color = AppColors.primaryColor
       ..style = PaintingStyle.fill
-      ..strokeWidth = 1.0;
+      ..strokeWidth = 5.0
+      ..strokeCap = StrokeCap.round
+      ..strokeJoin = StrokeJoin.round
+      ..strokeMiterLimit = 100.0;
 
-    // the radius
-    var center = Offset(size.width / 2, size.height / 2);
-  
-    canvas.drawCircle(center , size.width/(7.5), paint);
+    // Create a Path object
+    final path = Path();
+
+    // Start at the top-left corner
+    path.moveTo(size.width, size.height);
+
+    // Draw a quadratic Bezier curve
+    path.quadraticBezierTo((size.width ) / 2,0.0,0.0, size.height);
+
+    // Draw the path on the canvas
+    canvas.drawPath(path, paint);
     paint.color = AppColors.lightCyan;
   }
 
   @override
   bool shouldRepaint(covariant CustomPainter oldDelegate) => false;
 }
+
